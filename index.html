@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<script>
+    function temp() {
+        let celsius = document.getElementById("cTemp").value; // +prompt("Введите температуру по Цельсию");
+        let fahrenheit = (9 / 5) * celsius + 32;
+        document.getElementById('result').innerHTML = "Температура по Фарингейту: " + fahrenheit +
+            "&deg;"; // alert(fahrenheit);
+    }
+
+    function funName() {
+        let admin = null;
+        document.getElementById('adminStart').innerHTML = "Значение переменной admin на момент создания: " + admin;
+        let name = "Василий";
+        document.getElementById('name').innerHTML = "Значение переменной name на момент создания: " + name;
+        admin = name;
+        document.getElementById('adminEnd').innerHTML = "Значение переменной admin после присвоения ей значения: " +
+            admin;
+        console.log(admin);
+    }
+
+    function matematic() {
+        let des1 =
+            ' 1)т.к. знаки + имеют одинаковый приоретет то сперва выполняется сложение,получаем 20     <br>    2)дальше происходит конкатенация т.к. следующая 10ка является строкой получаем строку "2010" <br>         3)"2010" присваиваем в переменную mat1    <br>    4) с помощью console.log выводим mat1 в консоль <br> 5) С помощью (document.getElementById("ID").innerHTML = variable) выводим результат и коментарий на экран;'
+
+        let mat1 = 10 + 10 + "10";
+        console.log(mat1);
+        document.getElementById('description1').innerHTML = des1;
+        document.getElementById('resultOfMat1').innerHTML = mat1;
+        let des2 =
+            ' // 1)т.к. второе число является строкой сразу происходит конкатенация получаем строку "1010" <br> 2)далее еще одна конкатенация т.к. один из оперантов строка получаем строку "101010" <br>         3)"101010" присваиваем в переменную mat2 <br>         4) с помощью console.log выводим mat2 в консоль <br> 5) С помощью (document.getElementById("ID").innerHTML = variable) выводим результат и коментарий на экран;'
+
+        let mat2 = 10 + "10" + 10;
+        console.log(mat2);
+        document.getElementById('description2').innerHTML = des2;
+        document.getElementById('resultOfMat2').innerHTML = mat2;
+        let des3 =
+            '// 1)т.к. знаки + имеют одинаковый приоретет то сперва выполняется сложение,получаем 20 <br>         2)дальше не происходит конкатенация т.к. следующая 10ка хоть и кажется строкой но есть унарный "+" что делает ее числом в итоге получаем число 30 <br>         3)30 присваиваем в переменную mat3 <br>         4) с помощью console.log выводим mat3 в консоль <br>         5) С помощью (document.getElementById("ID").innerHTML = variable) выводим результат и коментарий на экран;'
+
+        let mat3 = 10 + 10 + +"10";
+        console.log(mat3);
+        document.getElementById('description3').innerHTML = des3;
+        document.getElementById('resultOfMat3').innerHTML = mat3;
+
+        let des4 =
+            '// 1)-"" будет равняться -0 (при приведении) <br>         2)10 деленное на -0 даст отрицательную бесконечность то-есть -Infinity <br>         3)-Infinity присваиваем в переменную mat4 <br>         4) с помощью console.log выводим mat4 в консоль <br>         5) С помощью (document.getElementById("ID").innerHTML = variable) выводим результат и коментарий на экран;'
+
+
+        let mat4 = 10 / -"";
+        console.log(mat4);
+        document.getElementById('description4').innerHTML = des4;
+        document.getElementById('resultOfMat4').innerHTML = mat4;
+
+        let des5 =
+            '// 1)т.к. в значении +"2,5" использована запятая вместо точки то унарный + даст значение NaN <br>         2)число деленное на NaN тоже будет иметь значение NaN <br>         3)NaN присваиваем в переменную mat5 <br>         4) с помощью console.log выводим mat5 в консоль <br>         5) С помощью (document.getElementById("ID").innerHTML = variable) выводим результат и коментарий на экран;'
+
+        let mat5 = 10 / +"2,5";
+        console.log(mat5);
+        document.getElementById('description5').innerHTML = des5;
+        document.getElementById('resultOfMat5').innerHTML = mat5;
+    }
+</script>
+
+<body>
+    <main>
+        
+        <div class="wrap">
+            <h1 class="header">Домашняя работа №1 к курсу Базовый курс JavaScript</h1>
+            <div class="otherclass">
+                <div class="qestion">
+                    <div class="condition">
+                        <h3 class="hedingqest">Задание №1</h3>
+                        <h4>Мы с вами будем переводить значение температуры в &deg; Цельсия в &deg; по Фарингейту. Для
+                            того
+                            что бы произвести вычесления введите в поле ниже температуру в &deg; Цельсия и нажмите
+                            кнопку
+                            "Посчитать"</h4>
+                        <input class="inp" id="cTemp" type="number">
+                        <button class="bth" onclick="temp()"> Посчитать </button>
+                    </div>
+                    <div class="decision">
+                        <p id="result"></p>
+                    </div>
+                </div>
+                <div class="qestion">
+                    <div class="condition">
+                        <h3 class="hedingqest">Задание №2</h3>
+                        <h4>Здесь мы немного поработаем с переменными. При нажатии кнопки будут созданны 2 переменные и
+                            выведенны их значения на разных этапах выполнения программы</h4>
+                        <button class="bth" onclick="funName()">Кнопка</button>
+                    </div>
+                    <div class="decision">
+                        <p id="adminStart"></p><br>
+                        <p id="name"></p><br>
+                        <p id="adminEnd"></p>
+                    </div>
+                </div>
+                <div class="qestion">
+                    <div class="condition">
+                        <h3 class="hedingqest">Задание №3</h3>
+                        <h4>Тут мы с вами решим легкие задачки что бы больше понять как ведет себя JS со строчными и
+                            числовыми элементами и с некоторыми операторами. При нажатии кнопки появяться несколько
+                            решений и коментариев к ним</h4>
+                        <button class="bth" onclick="matematic()">Кнопка</button>
+                    </div>
+                    <div class="decision">
+                        <p id="description1"></p>
+                        <p class="styleResult" id="resultOfMat1"></p>
+                        <p id="description2"></p>
+                        <p class="styleResult" id="resultOfMat2"></p>
+                        <p id="description3"></p>
+                        <p class="styleResult" id="resultOfMat3"></p>
+                        <p id="description4"></p>
+                        <p class="styleResult" id="resultOfMat4"></p>
+                        <p id="description5"></p>
+                        <p class="styleResult" id="resultOfMat5"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
