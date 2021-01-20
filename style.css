@@ -1,0 +1,122 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    /* font-family: 'Lato', Arial, sans-serif;
+    overflow-x: hidden; */
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.wrap {
+    width: 1440px;
+    margin: 0 auto;
+}
+
+.header {
+    text-align: center;
+}
+
+.qestion {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    flex-basis: 30%;
+    background-color: rgba(132, 0, 255, 0.288);
+    text-align: center;
+}
+
+.otherclass {
+    padding-top: 100px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.bth {
+    width: 80%;
+    height: 50px;
+    border: none;
+    border-radius: 30px;
+    outline: none;
+    background-color: blueviolet;
+}
+
+.bth:hover {
+    transform: scale(1.05);
+    transition-duration: 0.5s;
+    box-shadow: 0px 0px 10px 5px #64e5fc;
+    cursor: pointer;
+    background-color: rgb(190, 121, 255);
+}
+
+.inp {
+    margin-bottom: 20px;
+    outline: none;
+    padding: 0 20px;
+    width: 80%;
+    height: 35px;
+    border: none;
+    border-radius: 20px;
+}
+
+.condition {
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.decision {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    text-align: start;
+}
+
+.styleResult {
+    font-size: 20px;
+    font-style: italic;
+    font-weight: bold;
+    color: rgb(71, 51, 255);
+}
+
+.ankorFlex {
+    margin-top: 75px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.lessionAnkor {
+    background-color: #8000ff;
+    display: inline-block;
+    color: aliceblue;
+    padding: 5px 15px;
+    flex-basis: 22%;
+    text-align: center;
+}
+
+@media (max-width: 1000px) {
+    .wrap {
+        width: 900px;
+    }
+
+    .otherclass {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .qestion {
+        margin: 50px;
+        flex-basis: 35%;
+    }
+}
