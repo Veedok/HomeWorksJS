@@ -113,29 +113,25 @@
         let n1 = Number(document.getElementById("less2q4_1").value);
         let n2 = Number(document.getElementById("less2q4_3").value);
         let operation = document.getElementById("less2q4_2").value;
-        let res;
+        let res = null;
 
         function sum(a, b) {
-            result = a + b;
-            return result;
+            return a + b;;
         }
 
         function dif(a, b) {
-            result = a - b;
-            return result;
+            return a - b;
         }
 
         function inc(a, b) {
-            result = a * b;
-            return result;
+            return a * b;
         }
 
         function deg(a, b) {
-            result = a / b;
-            return result;
+            return a / b;
         }
 
-        function q5(x, y, c) {
+        function less2q5(x, y, c) {
             switch (c) {
                 case "/":
                     res = deg(x, y);
@@ -156,16 +152,16 @@
 
 
         if (operation == "*") {
-            res = ("Произведение чисел равняется " + q5(n1, n2, operation));
+            res = ("Произведение чисел равняется " + less2q5(n1, n2, operation));
 
         } else if (operation == "/") {
-            res = ("Частное чисел равняется " + q5(n1, n2, operation));
+            res = ("Частное чисел равняется " + less2q5(n1, n2, operation));
 
         } else if (operation == "+") {
-            res = ("Сумма чисел равна " + q5(n1, n2, operation));
+            res = ("Сумма чисел равна " + less2q5(n1, n2, operation));
 
         } else if (operation == "-") {
-            res = ("Разница чисел равна " + q5(n1, n2, operation));
+            res = ("Разница чисел равна " + less2q5(n1, n2, operation));
 
         } else {
             res = ("Вы ввели неправильный знак операции");
