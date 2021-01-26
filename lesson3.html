@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<script>
+    /*
+    Урок №3 Задание №1
+    */
+    /**
+     * Функция по подстановке к числу фразы "четное" , "нечетное"
+     */
+    function less3q1() {
+        let para = document.createElement('p');
+        let index = Number(document.getElementById("less3q1input").value);
+        for (let i = 0; i <= index; i++) {
+            if (i == 0) {
+                let para = document.createElement('p');
+                para.innerHTML = i + " -это ноль";
+                document.getElementById('less3q1').append(para);
+            } else if (i % 2 == 0) {
+                let para = document.createElement('p');
+                para.innerHTML = i + " -это четное число";
+                document.getElementById('less3q1').append(para);
+            } else {
+                let para = document.createElement('p');
+                para.innerHTML = i + " -это нечетное число";
+                document.getElementById('less3q1').append(para);
+            }
+        }
+    };
+    /*
+    Задание №2
+    */
+    /**
+     * Функция выводит в консоль и на страницу указанные данные
+     */
+    function less3q2() {
+        const post = {
+            author: "John", //вывести этот текст
+            postId: 23,
+            comments: [{
+                    userId: 10,
+                    userName: "Alex",
+                    text: "lorem ipsum",
+                    rating: {
+                        likes: 10,
+                        dislikes: 2 //вывести это число
+                    }
+                },
+                {
+                    userId: 5, //вывести это число
+                    userName: "Jane",
+                    text: "lorem ipsum 2", //вывести этот текст
+                    rating: {
+                        likes: 3,
+                        dislikes: 1
+                    }
+                },
+            ]
+        };
+
+        console.log(post);
+        console.log(post.author);
+        console.log(post.comments[0].rating.dislikes);
+        console.log(post.comments[1].userId);
+        console.log(post.comments[1].text);
+        let para = document.createElement('p');
+        para.innerHTML = post.author;
+        document.getElementById('less3q2').append(para);
+        para = document.createElement('p');
+        para.innerHTML = post.comments[0].rating.dislikes;
+        document.getElementById('less3q2').append(para);
+        para = document.createElement('p');
+        para.innerHTML = post.comments[1].userId;
+        document.getElementById('less3q2').append(para);
+        para = document.createElement('p');
+        para.innerHTML = post.comments[1].text;
+        document.getElementById('less3q2').append(para);
+
+    }
+    /* Звдвние №3
+    Сначала думал что необходимо менять ценну в самом массиве, но потом задело слово "сегодня" в условии задачи 
+    и решил что скидка временная и массив менять не стоит (тем более он записан как const) а просто посчитать и вывести цену с учетом скидки
+    */
+    /**
+     * Функция которая выводит цену до скидки и после применения скидки в 15%
+     */
+    function less3q3() {
+        const products = [{
+                id: 3,
+                price: 200,
+            },
+            {
+                id: 4,
+                price: 900,
+            },
+            {
+                id: 1,
+                price: 1000,
+            },
+        ];
+
+        function productDiscount(a) {
+
+            console.log(a.price - (a.price / 100 * 15));
+            let discount = a.price - (a.price / 100 * 15);
+            let para = document.createElement('p');
+            para.innerHTML = "Цена до скидки: " + a.price + "<br>Цена после скидки: " + discount;
+            document.getElementById('less3q3').append(para);
+        }
+        products.forEach(productDiscount);
+    }
+
+    /*Задание №4*/
+    /* 
+     * Функция которая отфильтровывает продукты с картинками и без после выводит их на экран и сортирует ВСЕ товары по цене и выводит их на экран
+     */
+    function less3q4() {
+        const products = [{
+                id: 3,
+                price: 127,
+                photos: [
+                    "1.jpg",
+                    "2.jpg",
+                ]
+            },
+            {
+                id: 5,
+                price: 499,
+                photos: []
+            },
+            {
+                id: 10,
+                price: 26,
+                photos: [
+                    "3.jpg"
+                ]
+            },
+            {
+                id: 8,
+                price: 78,
+            },
+        ];
+
+        // определяем есть ли картинки в товаре и не являються ли они пустыми
+        let arrayWithPictures = products.filter(function (a) {
+            return (a.hasOwnProperty('photos') && a.photos.length != 0);
+        });
+        // выводим на экран id товаров с картинками
+        arrayWithPictures.forEach(function (a) {
+            let para = document.createElement('p');
+            para.innerHTML = "Товар с ID " + a.id + " c картинками";
+            document.getElementById('less3q4').append(para);
+        });
+
+        // создаем массив отсартированный по цене
+        let sortArr = products.sort(function (a, b) {
+            return a.price - b.price;
+        });
+        // выводим на экран товары с ценами по возрастанию
+        sortArr.forEach(function (a) {
+            let para = document.createElement('p');
+            para.innerHTML = "Товар с ID " + a.id + " стоит " + a.price + "$";
+            document.getElementById('less3q4').append(para);
+        });
+    }
+
+    // Задание №5
+    /**
+     * Функция которое берет число у пользовтеля и выводит на экран числа от 0 до числа пользователя
+     * функцеонал похож на задачу №1 но с другой реализацией
+     */
+    function less3q5() {
+        let userNumber = Number(document.getElementById("less3q5input").value);
+
+        function numberOut(a) {
+            console.log(a);
+            let para = document.createElement('p');
+            para.innerHTML = a;
+            document.getElementById('less3q5').append(para);
+            return userNumber;
+        }
+        for (let i = 0; i < numberOut(i); i++) {}
+    }
+    // Задание №6
+    /**
+     * Функция создающая "горку" из символов которые ввел пользователь и содержащюю кол-во строк которые указал пользователь
+     */
+    function less3q6() {
+        let symbol = String(document.getElementById("less3q6symbol").value);
+        let stringOfUser = Number(document.getElementById("less3q6string").value);
+        let slide = symbol;
+        for (let i = 0; i < stringOfUser; i++) {
+            let para = document.createElement('p');
+            para.innerHTML = slide;
+            document.getElementById('less3q6').append(para);
+            console.log(slide);
+            slide = slide + symbol;
+            
+        }
+    }
+</script>
+
+<body>
+    <main>
+        <div class="wrap">
+            <h1 class="header">Домашняя работа №3 к курсу Базовый курс JavaScript</h1>
+            <div class="otherclass">
+                <div class="qestion">
+                    <div class="condition">
+                        <h3 class="hedingqest">Задание №1</h3>
+                        <h4>Введите число и JS выведет все числа до него включительно и укажет какие из них четные а
+                            какие не четные</h4>
+                        <input class="inp" id="less3q1input" type="number">
+                        <button class="bth" onclick="less3q1()"> Посчитать </button>
+                    </div>
+                    <div id="less3q1" class="decision">
+                    </div>
+                </div>
+                <div class="qestion">
+                    <div class="condition">
+                        <h3 class="hedingqest">Задание №2</h3>
+                        <h4>Здесь мы будем выводить данные из объектов и масивов</h4>
+                        <button class="bth" onclick="less3q2()">Кнопка</button>
+                    </div>
+                    <div id="less3q2" class="decision">
+
+                    </div>
+                </div>
+                <div class="qestion">
+                    <div class="condition">
+                        <h3 class="hedingqest">Задание №3</h3>
+                        <h4>Данн массив с обьектами каждый содержит ID и цену. По нажатию кнопки будем выводить цену
+                            после применения скидки</h4>
+                        <button class="bth" onclick="less3q3()">Кнопка</button>
+                    </div>
+                    <div id="less3q3" class="decision">
+
+                    </div>
+                </div>
+                <div class="qestion">
+                    <div class="condition">
+                        <h3 class="hedingqest">Задание №4</h3>
+                        <h4>Данн массив с обьектами каждый содержит ID и цену. По нажатию кнопки будем выводить цену
+                            после применения скидки и отсартированные по цене товары</h4>
+                        <button class="bth" onclick="less3q4()">Кнопка</button>
+                    </div>
+                    <div id="less3q4" class="decision">
+
+                    </div>
+                </div>
+                <div class="qestion">
+                    <div class="condition">
+                        <h3 class="hedingqest">Задание №5</h3>
+                        <h4>После введения числа в поле будут выводиться числа от 0 до введенного числа</h4>
+                        <input class="inp" id="less3q5input" type="number">
+                        <button class="bth" onclick="less3q5()">Кнопка</button>
+                    </div>
+                    <div id="less3q5" class="decision">
+
+                    </div>
+                </div>
+                <div class="qestion">
+                    <div class="condition">
+                        <h3 class="hedingqest">Задание №6</h3>
+                        <h4>Введите символ из которого будет горка и введите кол-во строк которые должны быть в горке</h4>
+                        <p>Сюда надо ввести символ</p>
+                        <input class="inp" id="less3q6symbol" type="text">
+                        <p>Сюда надо ввести кол-во строк</p>
+                        <input class="inp" id="less3q6string" type="number">
+                        <button class="bth" onclick="less3q6()">Кнопка</button>
+                    </div>
+                    <div id="less3q6" class="decision">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
