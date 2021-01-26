@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<script>
+    /*Задание №1
+    В функции есть 2 спорных момента ( по крайней мере я увидел только 2)
+    1) Проверка на целое число. Мне больше понравилось использовать остаток от деления на 1 чем функцию проверку
+    2) Можно конструктору не передовать нули и тогда (сотни,десятки) будут undefined*/
+    /**
+     * Функция преобразовующая число в объект
+     */
+    function numberIntoObject() {
+        function My(units, tens, hundereds) {
+            this.units = units;
+            this.tens = tens;
+            this.hundereds = hundereds;
+        }
+        let numberObj = Number(document.getElementById("less4q1input").value);
+        let obj = null;
+        if (numberObj < 0 || numberObj > 999 || isNaN(numberObj) || (numberObj % 1) !=
+            0 /*!Number.isInteger(numberObj);*/ ) {
+            console.log("Введите целое число в диапозоне от 0 до 999")
+            console.log(new My());
+        } else if ((numberObj / 100) > 1) {
+            numberObj = String(numberObj);
+            obj = new My(numberObj[2], numberObj[1], numberObj[0])
+            console.log(obj);
+        } else if ((numberObj / 10) > 1) {
+            numberObj = String(numberObj);
+            obj = new My(numberObj[1], numberObj[0], "0")
+            console.log(obj);
+        } else {
+            numberObj = String(numberObj);
+            obj = new My(numberObj, "0", "0")
+            console.log(obj);
+        }
+    }
+    /*Задание №1.1
+    Добавил возможность ввести на странице имя и цену товара и на выходе получить строку
+    до применения скидки и после применения скидки.
+    Задал вопрос в группе и наставнику про наследование и правильно ли разместил функцию со скидкой. Наставник не ответил еще а в последующие дни исправить вряд ли получится из-за работы*/
+    /**
+     * Функция принимающая на вход имя и цену и имеет возможность сделать скидку в 25% в стандарте ES5 
+     */
+    function less4q1es5() {
+        let productName = String(document.getElementById("less4q1es").value);
+        let productPrice = Number(document.getElementById("less4q1es1").value);
+
+        function Product(name, price) {
+            this.name = name;
+            this.price = price;
+        }
+        Product.prototype.make25PercentDiscount = function () {
+            this.price = this.price - ((this.price / 100) * 25);
+        }
+        let pro = new Product(productName, productPrice);
+        console.log(pro);
+        let para = document.createElement('p');
+        para.innerHTML = "Товар " + pro.name + " стоит: " + pro.price;
+        document.getElementById('less4q2').append(para);
+        pro.make25PercentDiscount();
+        console.log(pro);
+        para = document.createElement('p');
+        para.innerHTML = "Товар " + pro.name + " после применения скидки стоит: " + pro.price;
+        document.getElementById('less4q2').append(para);
+
+    }
+    /**
+     * Функция принимающая на вход имя и цену и имеет возможность сделать скидку в 25% в стандарте ES6 
+     */
+    function less4q1es6() {
+        let productName = String(document.getElementById("less4q1es").value);
+        let productPrice = Number(document.getElementById("less4q1es1").value);
+        class ProductEs6 {
+            constructor(name, price) {
+                this.name = name;
+                this.price = price;
+            }
+            make25PercentDiscount() {
+                this.price = this.price - ((this.price / 100) * 25);
+            }
+        }
+
+        let pro = new ProductEs6(productName, productPrice);
+        console.log(pro);
+        let para = document.createElement('p');
+        para.innerHTML = "Товар " + pro.name + " стоит: " + pro.price;
+        document.getElementById('less4q2').append(para);
+        pro.make25PercentDiscount();
+        console.log(pro);
+        para = document.createElement('p');
+        para.innerHTML = "Товар " + pro.name + " после применения скидки стоит: " + pro.price;
+        document.getElementById('less4q2').append(para);
+    }
+    /*Задание 1.2
+    Тут тоже начал брать текст из инпутов и пытаться дополнить задание, но если все делать по уму
+    и сделать сто то подобное публикации поста с возможностью его редактировать то код вырастет в разы
+    и достигнет полноценного, отдельног задания. В связи с этим просто начал вызывать функции с заданными
+    параметрами*/
+
+    /*ES5*/
+    function less4q12es5() {
+        let dateNow = new Date();
+        let nameAutor = document.getElementById('less4q12name').value;
+        let newPost = document.getElementById('less4q12text').value;
+
+        function Post(author, text, date) {
+            this.author = author;
+            this.text = text;
+            this.date = date;
+        }
+        Post.prototype.edit = function (editText) {
+            this.text = editText;
+        }
+
+        function AttachedPost(author, text, date) {
+            Post.call(this, author, text, date);
+            this.highlighted = false;
+        }
+
+        AttachedPost.prototype = Object.create(Post.prototype);
+        AttachedPost.prototype.constructor = AttachedPost;
+        AttachedPost.prototype.makeTextHighlighted = function () {
+            this.highlighted = true;
+        }
+
+
+        let post2 = new AttachedPost("Виктор", "Вызов 1ого конструктора через другой", dateNow);
+        let post1 = new Post(nameAutor, newPost, dateNow);
+        post2.makeTextHighlighted();
+        console.log(post1);
+        post1.edit("Почти справился с заданием 1.2");
+        console.log(post1);
+    }
+    /*ES6*/
+    function less4q12es6() {
+        let dateNow = new Date();
+        let nameAutor = document.getElementById('less4q12name').value;
+        let newPost = document.getElementById('less4q12text').value;
+        class Post {
+            constructor(author, text, date) {
+                this.author = author;
+                this.text = text;
+                this.date = date;
+            }
+            edit(editText) {
+                this.text = editText;
+            }
+        }
+        class AttachedPost extends Post {
+            constructor(author, text, date) {
+                super(author, text, date);
+                this.highlighted = false;
+            }
+            makeTextHighlighted() {
+                this.highlighted = true;
+            }
+        }
+        let post1 = new Post(nameAutor, newPost, dateNow);
+        post1.edit("Отредоктированный текст");
+        let post2 = new AttachedPost("Василий", "Сообщение от василия", dateNow);
+        post2.makeTextHighlighted();
+    }
+</script>
+
+<body>
+    <main>
+        <div class="wrap">
+            <h1 class="header">Домашняя работа №4 к курсу Базовый курс JavaScript</h1>
+            <div class="otherclass">
+                <div class="qestion">
+                    <div class="condition">
+                        <h3 class="hedingqest">Задание №1</h3>
+                        <h4>Написать функцию, преобразующую число в объект. Передавая на
+                            вход число в диапазоне [0, 999]</h4>
+                        <input class="inp" id="less4q1input" type="text">
+                        <button class="bth" onclick="numberIntoObject()"> Посчитать </button>
+                    </div>
+                    <div id="less4q1" class="decision">
+                    </div>
+                </div>
+                <div class="qestion">
+                    <div class="condition">
+                        <h3 class="hedingqest">Задание №1.1</h3>
+                        <h4>Будем практиковаться и писать код в стандарте ES5 и ES6</h4>
+                        <p>Введите название продукта</p>
+                        <input class="inp" id="less4q1es" type="text">
+                        <p>Ввудите цену продукта</p>
+                        <input class="inp" id="less4q1es1" type="number">
+                        <button class="bth" onclick="less4q1es5()">ES5</button>
+                        <button class="bth" onclick="less4q1es6()">ES6</button>
+                    </div>
+                    <div id="less4q2" class="decision">
+
+                    </div>
+                </div>
+                <div class="qestion">
+                    <div class="condition">
+                        <h3 class="hedingqest">Задание №1.2</h3>
+                        <h4>Продалжаем практику по написанию кода в стандарте ES5 и ES6</h4>
+                        <p>Введите ваше имя</p>
+                        <input class="inp" id="less4q12name" type="text">
+                        <p>Ввeдите сообщение</p>
+                        <input class="inp" id="less4q12text" type="text">
+                        <button class="bth" onclick="less4q12es5()">ES5</button>
+                        <button class="bth" onclick="less4q12es6()">ES6</button>
+                    </div>
+                    <div id="less3q3" class="decision">
+
+                    </div>
+                </div>
+                <div class="qestion">
+                    <div class="condition">
+                        <h3 class="hedingqest">Задание №4</h3>
+                        <h4>Данн массив с обьектами каждый содержит ID и цену. По нажатию кнопки будем выводить цену
+                            после применения скидки и отсартированные по цене товары</h4>
+                        <button class="bth" onclick="less3q4()">Кнопка</button>
+                    </div>
+                    <div id="less3q4" class="decision">
+
+                    </div>
+                </div>
+                <div class="qestion">
+                    <div class="condition">
+                        <h3 class="hedingqest">Задание №5</h3>
+                        <h4>После введения числа в поле будут выводиться числа от 0 до введенного числа</h4>
+                        <input class="inp" id="less3q5input" type="number">
+                        <button class="bth" onclick="less3q5()">Кнопка</button>
+                    </div>
+                    <div id="less3q5" class="decision">
+
+                    </div>
+                </div>
+                <div class="qestion">
+                    <div class="condition">
+                        <h3 class="hedingqest">Задание №6</h3>
+                        <h4>Введите символ из которого будет горка и введите кол-во строк которые должны быть в горке
+                        </h4>
+                        <p>Сюда надо ввести символ</p>
+                        <input class="inp" id="less3q6symbol" type="text">
+                        <p>Сюда надо ввести кол-во строк</p>
+                        <input class="inp" id="less3q6string" type="number">
+                        <button class="bth" onclick="less3q6()">Кнопка</button>
+                    </div>
+                    <div id="less3q6" class="decision">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
