@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +9,10 @@
         input {
             border-style: solid;
         }
+
     </style>
 </head>
+
 <body>
     <form>
         <input id="first" type="text"><br>
@@ -36,7 +39,25 @@
      -->
 
     <script>
-        
+        let formEl = document.querySelector('form');
+        let inpFirst = document.querySelector('#first');
+        let inpSecond = document.querySelector('#second');
+        formEl.addEventListener('submit', function(event) {
+            if (inpFirst.value == "") {
+                inpFirst.style.borderColor = "red";
+                if (inpSecond.value == "") {
+                    inpSecond.style.borderColor = "red";
+                }
+                event.preventDefault();
+            } else if (inpSecond.value == "") {
+                inpSecond.style.borderColor = "red";
+                event.preventDefault();
+            } else {
+                alert("Все хорошо. Данные отправлены");
+            }
+        })
+
     </script>
 </body>
+
 </html>

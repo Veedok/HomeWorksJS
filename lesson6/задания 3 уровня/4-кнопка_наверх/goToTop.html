@@ -28,6 +28,19 @@
 
     <script>
         
+        // Добавил на кнопку событие что бы она реально перекидывала вверх
+        let goTop = document.querySelector('#goToTop');
+        let y = 
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset < 500) {
+                goTop.style.display = "none";
+            } else {
+                goTop.style.display = "block";
+            }
+        })
+        goTop.addEventListener('click', function(){
+            document.documentElement.scrollTop = 0;
+        })
     </script>
 </body>
 </html>
